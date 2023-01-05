@@ -1,0 +1,78 @@
+:root {
+  --red-100: #ff735d;
+  --red-200: #ff4e32;
+  --red-300: #f02100;
+  --red-400: #be1a00;
+  --red-500: #951400;
+  --red: var(--red-300);
+
+  --orange-100: #FFAF5D;
+  --orange-200: #FF9932;
+  --orange-300: #f07900;
+  --orange-400: #BE6000;
+  --orange-500: #954b00;
+  --orange: var(--orange-300);
+
+  --yellow-100: #ffcf5d;
+  --yellow-200: #ffc232;
+  --yellow-300: #f0a800;
+  --yellow-400: #be8500;
+  --yellow-500: #956800;
+  --yellow: var(--yellow-300);
+
+  --green-100: #4aca71;
+  --green-200: #25bf54;
+  --green-300: #00b136;
+  --green-400: #008d2b;
+  --green-500: #006e21;
+  --green: var(--green-300);
+
+  --teal-100: #459ab2;
+  --teal-200: #2486a2;
+  --teal-300: #057595;
+  --teal-400: #045d76;
+  --teal-500: #02495c;
+  --teal: var(--teal-300);
+
+  --blue-100: #5469be;
+  --blue-200: #344cb0;
+  --blue-300: #1430a3;
+  --blue-400: #0e2582;
+  --blue-500: #081b65;
+  --blue: var(--blue-300);
+
+  --purple-100: #7552be;
+  --purple-200: #5a31b0;
+  --purple-300: #3f11a4;
+  --purple-400: #310c82;
+  --purple-500: #250765;
+  --purple: var(--purple-300);
+
+  --light-100: #fef2e6;
+  --light-200: #fce4cc;
+  --light-300: #fbd7b3;
+  --light-400: #f9c999;
+  --light-500: #f9c999;
+  --light: var(--light-300);
+
+  --dark-100: #783d00;
+  --dark-200: #603000;
+  --dark-300: #482400;
+  --dark-400: #301800;
+  --dark-500: #180c00;
+  --dark: var(--dark-300);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
