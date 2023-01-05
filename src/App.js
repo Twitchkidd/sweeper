@@ -1,25 +1,19 @@
-import logo from './logo.svg';
+import styled from 'styled-components';
 import './App.css';
 
+const Window = styled.div`
+	height: 500px;
+	width: 900px;
+	background: var(--dark-300);
+	border: 20px ridge var(--dark-500);
+`;
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className='App'>
+			<Window />
+		</div>
+	);
 }
 
 export default App;
