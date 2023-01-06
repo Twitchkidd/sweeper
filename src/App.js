@@ -4,8 +4,8 @@ import './App.css';
 const Window = styled.div`
 	height: 540px;
 	width: 956px;
-	background: var(--shade-600);
-	border: 12px solid var(--warm-gray);
+	background: var(--shade-800);
+	border: 4px solid var(--warm-gray);
 
 	border-radius: 1px;
 `;
