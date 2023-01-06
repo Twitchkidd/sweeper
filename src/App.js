@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import './App.css';
 
 const Window = styled.div`
-	height: 500px;
-	width: 900px;
-	background: var(--dark-300);
-	border: 20px ridge var(--dark-500);
+	height: 540px;
+	width: 956px;
+	background: var(--shade-600);
+	border: 12px solid var(--warm-gray);
+
+	border-radius: 1px;
 `;
 
 function App() {

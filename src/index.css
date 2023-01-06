@@ -48,19 +48,38 @@
   --purple-500: #250765;
   --purple: var(--purple-300);
 
-  --light-100: #fef2e6;
-  --light-200: #fce4cc;
-  --light-300: #fbd7b3;
-  --light-400: #f9c999;
-  --light-500: #f9c999;
-  --light: var(--light-300);
+  --tint-900: #8f867d;
+  --tint-800: #9c938c;
+  --tint-700: #a8a19a;
+  --tint-600: #b5aea9;
+  --tint-500: #c1bcb7;
+  --tint-400: #cdc9c5;
+  --tint-300: #dad7d4;
+  --tint-200: #e6e4e2;
+  --tint-100: #f3f2f1;
+  --white: #ffffff;
 
-  --dark-100: #783d00;
-  --dark-200: #603000;
-  --dark-300: #482400;
-  --dark-400: #301800;
-  --dark-500: #180c00;
-  --dark: var(--dark-300);
+  --tone-100: #837971;
+  --tone-200: #827a72;
+  --tone-300: #827a74;
+  --tone-400: #827b76;
+  --tone-500: #827c78;
+  --tone-600: #817d79;
+  --tone-700: #817e7b;
+  --tone-800: #817e7d;
+  --tone-900: #807f7e;
+  --gray: #808080;
+
+  --shade-100: #766c64;
+  --shade-200: #696059;
+  --shade-300: #5c544e;
+  --shade-400: #4f4843;
+  --shade-500: #423c38;
+  --shade-600: #34302c;
+  --shade-700: #272421;
+  --shade-800: #1a1816;
+  --shade-900: #0d0c0b;
+  --black: #000000;
 }
 
 body {

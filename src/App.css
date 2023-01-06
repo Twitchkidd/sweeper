@@ -3,8 +3,8 @@
   place-items: center;
 
   height: 100vh;
-  background: var(--dark-400);
+  background: var(--shade-600);
   
-  color: var(--light-500);
+  color: var(--orange-200);
   text-align: center;
 }
