@@ -1,9 +1,22 @@
 import styled from 'styled-components';
-import './App.css';
+import MenuBar from './components/MenuBar';
+import GameBar from './components/GameBar';
+import Game from './components/Game';
+
+const Wrap = styled.div`
+	display: grid;
+	place-items: center;
+
+	height: 100vh;
+	background: var(--shade-800);
+
+	color: var(--orange-200);
+	text-align: center;
+`;
 
 const Window = styled.div`
-	height: 540px;
-	width: 956px;
+	/* display: flex; */
+
 	background: var(--shade-800);
 	border: 4px solid var(--warm-gray);
 
@@ -12,9 +25,13 @@ const Window = styled.div`
 
 function App() {
 	return (
-		<div className='App'>
-			<Window />
-		</div>
+		<Wrap>
+			<Window>
+				<MenuBar />
+				<GameBar />
+				<Game difficulty='expert' />
+			</Window>
+		</Wrap>
 	);
 }
 

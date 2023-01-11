@@ -85,8 +85,15 @@
 	--black: #000000;
 }
 
-body {
+*,
+*::before,
+*::after {
+	padding: 0;
 	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
 	font-family: 'VT323', monospace;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
