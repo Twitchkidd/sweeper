@@ -37,17 +37,32 @@ const Game = ({ difficulty }) => {
 		case 'default':
 			throw new Error('No difficulty set!');
 	}
-	// lol this is bad, redo
-	// yay though, you wrote some bad code! better than no code!
+	// Create an initial array 1 through the number of cells
+	let cells = range(wide * high);
+	// Create an array of cells with mines
+	let minedCells = [];
+	let potential = cells.slice();
+	for (let i = 1; i <= mines; i++) {
+		const nextIndex = Math.floor(Math.random() * potential.length);
+		minedCells.push(potential[nextIndex]);
+		potential.splice(nextIndex, 1);
+	}
+	// Construct cells as objects with coordinates, and if it's mined
+	cells = cells.map(c => ({
+		row: Math.ceil(c / wide),
+		col: c === wide ? wide : c % wide,
+		mine: minedCells.includes(c),
+	}));
+	console.log(cells);
 	return (
 		<Board wide={wide} high={high}>
-			{range(high).map(h => (
+			{/* {range(high).map(h => (
 				<div key={h}>
 					{range(wide).map(w => (
 						<Cell key={[h, w]} />
 					))}
 				</div>
-			))}
+			))} */}
 		</Board>
 	);
 };
