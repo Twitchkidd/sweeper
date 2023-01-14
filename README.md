@@ -12,3 +12,7 @@ Objective and strategy
 A game of Minesweeper begins when the player first selects a cell on a board. In some versions of the game the first click is guaranteed to be safe; whilst some other variants further guaranteeing that all adjacent cells are safe as well. During the game, the player uses information given from the opened cells to deduce further cells that are safe to open, iteratively gaining more information to solve the board. The player is also given the number of remaining mines in the board, known as the minecount, which is calculated as the total number of mines subtracted by the number of flagged cells (thus the minecount can be negative if too many flags have been placed).
 
 To win a game of Minesweeper, all non-mine cells must be opened without opening a mine. There is no score, however there is a timer recording the time taken to finish the game. Difficulty can be increased by adding mines or starting with a larger grid. Microsoft Minesweeper offers three default board configurations, usually known as beginner, intermediate and expert, in order of increasing difficulty. Beginner is usually on an 8x8 or 9x9 board containing 10 mines, Intermediate is usually on a 16x16 board with 40 mines and expert is usually on a 30x16 board with 99 mines, however this is usually customisable.
+
+## 2023-01-14
+
+https://www.taniarascia.com/react-architecture-directory-structure/

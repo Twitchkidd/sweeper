@@ -1,14 +1,6 @@
 import styled from 'styled-components';
 import { range } from '../utils/lib';
 
-const Board = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-
-	width: ${props => props.wide * 41}px;
-	background: #888;
-`;
-
 const Cell = styled.div`
 	width: 20px;
 	height: 20px;
