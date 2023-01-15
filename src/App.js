@@ -1,18 +1,11 @@
-import styled from 'styled-components';
+import { useState } from 'react';
+import AppWrap from './components/layout/core/AppWrap/AppWrap';
+import MenuPage from './views/Menu/MenuPage';
+import GamePage from './views/Game/GamePage';
+
 import MenuBar from './components/MenuBar';
 import GameBar from './components/GameBar';
 import Game from './components/Game';
-
-const Wrap = styled.div`
-	display: grid;
-	place-items: center;
-
-	height: 100vh;
-	background: var(--shade-800);
-
-	color: var(--orange-200);
-	text-align: center;
-`;
 
 const Window = styled.div`
 	/* display: flex; */
@@ -23,16 +16,16 @@ const Window = styled.div`
 	border-radius: 1px;
 `;
 
-function App() {
-	return (
-		<Wrap>
-			<Window>
-				<MenuBar />
-				<GameBar />
-				<Game difficulty='expert' />
-			</Window>
-		</Wrap>
-	);
-}
+const App = () => {
+	const [playing, setPlaying] = useState(false);
+	// const [difficulty, setDifficulty] = useState(null);
+	return <AppWrap>{!playing ? <MenuPage /> : <GamePage />}</AppWrap>;
+};
 
 export default App;
+
+// <Window>
+// 	<MenuBar />
+// 	<GameBar />
+// 	<Game difficulty='expert' />
+// </Window>

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { range } from '../utils/lib';
+import styled from 'styled-components';
 
 const Cell = styled.div`
 	width: 20px;
