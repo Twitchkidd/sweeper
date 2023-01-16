@@ -3,3 +3,5 @@ const GamePage = ({ difficulty }) => {
 };
 
 export default GamePage;
+
+// And here, clearly, will be the game proper
