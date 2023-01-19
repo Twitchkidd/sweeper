@@ -30,3 +30,7 @@ https://www.taniarascia.com/react-architecture-directory-structure/
 ## colors and font location
 
 They're in index.css ... normally they'd be worked into a global stylesheet with styled-components, this project wasn't created with the intent to stay a create-react-app project forever, HENCE!
+
+## 2023-01-19
+
+Are some of the things in layout actually layout components or are they components that have an aspect of layout to them, cause it seems like you see them in one context, so, something to thing about in the morning.
