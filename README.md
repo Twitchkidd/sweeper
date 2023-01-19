@@ -20,3 +20,7 @@ To the future!
 ## 2023-01-14
 
 https://www.taniarascia.com/react-architecture-directory-structure/
+
+## colors and font location
+
+They're in index.css ... normally they'd be worked into a global stylesheet with styled-components, this project wasn't created with the intent to stay a create-react-app project forever, HENCE!
