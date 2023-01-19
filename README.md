@@ -1,4 +1,10 @@
-# minesweeper!
+# sweeper - minesweeper clone!
+
+## dev instructions
+
+It's a create-react-app build, have git, node, and yarn installed and set up, clone the repo and run `yarn && yarn start` to install dependencies and serve it up to localhost:3000
+
+We're following Issue Based Development and semver, so branches off main reflect the version, then a dev branch, then branches that start with the issue number and include a concise description, like 001-colors-and-font-location.
 
 ## From Wikipedia:
 
