@@ -34,3 +34,9 @@ They're in index.css ... normally they'd be worked into a global stylesheet with
 ## 2023-01-19
 
 Are some of the things in layout actually layout components or are they components that have an aspect of layout to them, cause it seems like you see them in one context, so, something to thing about in the morning.
+
+## 2023-01-20
+
+I can't find anything on what the game bar (?) or anything are supposed to be called, so we've got the title bar, menu bar, and game bar now, go!
+
+> yellow squares look bigger on a white background compared to a black background, while red squares look smaller on a white background than a black background! ~Itten: Elements of Color
