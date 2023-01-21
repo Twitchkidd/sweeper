@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
 const Bar = styled.div`
-	background: #874756;
+	background: var(--warm-gray);
 `;
 
 const GameBar = () => (
 	<Bar>
-		<p>000 -- 99</p>
+		<span id='mineCount'>000</span>
+		<span>:)</span>
+		<span id='timer'>99</span>
 	</Bar>
 );
 

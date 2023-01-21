@@ -4,15 +4,16 @@ import MenuBar from '../../components/game/MenuBar/MenuBar';
 import GameBar from '../../components/game/GameBar/GameBar';
 import Board from '../../components/layout/game/Board/Board';
 import Cell from '../../components/game/Cell/Cell';
+import { sizeAndDensity } from '../../utils/helpers/game.helpers';
 
-// const GamePage = ({ difficulty }) => {
-const GamePage = () => {
+const GamePage = ({ difficulty, backToMenu }) => {
+	const { wide, high, mines } = sizeAndDensity(difficulty);
 	return (
 		<Window>
-			<TitleBar />
+			<TitleBar backToMenu={backToMenu} />
 			<MenuBar />
 			<GameBar />
-			<Board>
+			<Board wide={wide}>
 				<Cell />
 			</Board>
 		</Window>
