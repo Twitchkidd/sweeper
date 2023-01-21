@@ -1,3 +1,5 @@
+import { range } from './array.helpers';
+
 export const sizeAndDensity = difficulty => {
 	let wide, high, mines;
 	switch (difficulty) {
@@ -21,3 +23,5 @@ export const sizeAndDensity = difficulty => {
 	}
 	return { wide, high, mines };
 };
+
+// export const

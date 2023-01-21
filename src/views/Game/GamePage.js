@@ -8,6 +8,10 @@ import { sizeAndDensity } from '../../utils/helpers/game.helpers';
 
 const GamePage = ({ difficulty, backToMenu }) => {
 	const { wide, high, mines } = sizeAndDensity(difficulty);
+	// I should take the higher level things and make them gamepage's responsibility
+	// and let the board handle the cells, and pass back up what gamebar needs
+	// okay no wait, gamebar and board are both game.
+	// Naming things is hard.
 	return (
 		<Window>
 			<TitleBar backToMenu={backToMenu} />
