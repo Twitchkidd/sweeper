@@ -26,9 +26,9 @@ export const sizeAndDensity = difficulty => {
 
 export const seedBoard = difficulty => {
 	const { wide, high, mines } = sizeAndDensity(difficulty);
-	// Create an initial array 1 through the number of cells
+	// Create the initial array of cells
 	let cells = range(wide * high);
-	// Create an array of cells with mines
+	// Decide the mined cells
 	let minedCells = [];
 	let potential = cells.slice();
 	for (let i = 1; i <= mines; i++) {
@@ -36,18 +36,21 @@ export const seedBoard = difficulty => {
 		minedCells.push(potential[nextIndex]);
 		potential.splice(nextIndex, 1);
 	}
-	// Construct cells as objects with coordinates, and if it's mined
-	cells = cells.map((c, i) => ({
-		id: i + 1,
+	// Cells as objects with ids, coordinates, and if it's mined
+	cells = cells.map(c => ({
+		id: c,
 		row: Math.ceil(c / wide),
 		col: c % wide === 0 ? wide : c % wide,
 		mine: minedCells.includes(c),
 	}));
-	// Iterate through cells and populate with adjacent mines for unmined cells
+	// Adjacent cells are determined by considering the location of the
+	// cell on the board, then a set of coordinates for adjacent cells
+	// can be determined, and then we can set the property on the cell
+	// as an array of ids with the helper function.
 	const idForCoords = (col, row) =>
 		cells.filter(c => c.col === col && c.row === row).map(c => c.id)[0];
 	// Coordinates are [col, row]
-	let adj = []; // adjacent
+	let adj = [];
 	cells.forEach((c, i) => {
 		if (c.row === 1) {
 			if (c.col === 1) {
