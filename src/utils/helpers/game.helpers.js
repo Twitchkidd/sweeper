@@ -18,7 +18,7 @@ export const sizeAndDensity = difficulty => {
 			high = 16;
 			mines = 99;
 			break;
-		case 'default':
+		default:
 			throw new Error('No difficulty set!');
 	}
 	return { wide, high, mines };
