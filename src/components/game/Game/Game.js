@@ -7,13 +7,13 @@ import { sizeAndDensity, seedBoard } from '../../../utils/helpers/game.helpers';
 const Game = ({ difficulty }) => {
 	const [cells, setCells] = useState(seedBoard(difficulty));
 	const { wide, high, mines } = sizeAndDensity(difficulty);
-	// cell: id: 1-X, col: num, row: num, mine: bool, adj: [id, id, id]
+	// cell: id: 1-X, col: num, row: num, mine: bool, adjacentCells: [id, id, id], flag: bool, open: bool, adjacentMines?: num
 	return (
 		<>
 			<GameBar />
 			<Board wide={wide}>
 				{cells.map(cell => (
-					<Cell key={cell.id} />
+					<Cell key={cell.id}>{cell.mine ? 'm' : cell.adjacentMines}</Cell>
 				))}
 			</Board>
 		</>

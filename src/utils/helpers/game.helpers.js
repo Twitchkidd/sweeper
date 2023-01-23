@@ -61,7 +61,7 @@ export const seedBoard = difficulty => {
 				];
 				cells[i] = {
 					...c,
-					adj: adj.map(coords => idForCoords(coords[0], coords[1])),
+					adjacentCells: adj.map(coords => idForCoords(coords[0], coords[1])),
 				};
 				return;
 			} else if (c.col === wide) {
@@ -72,7 +72,7 @@ export const seedBoard = difficulty => {
 				];
 				cells[i] = {
 					...c,
-					adj: adj.map(coords => idForCoords(coords[0], coords[1])),
+					adjacentCells: adj.map(coords => idForCoords(coords[0], coords[1])),
 				};
 				return;
 			} else {
@@ -85,7 +85,7 @@ export const seedBoard = difficulty => {
 				];
 				cells[i] = {
 					...c,
-					adj: adj.map(coords => idForCoords(coords[0], coords[1])),
+					adjacentCells: adj.map(coords => idForCoords(coords[0], coords[1])),
 				};
 				return;
 			}
@@ -98,7 +98,7 @@ export const seedBoard = difficulty => {
 				];
 				cells[i] = {
 					...c,
-					adj: adj.map(coords => idForCoords(coords[0], coords[1])),
+					adjacentCells: adj.map(coords => idForCoords(coords[0], coords[1])),
 				};
 				return;
 			} else if (c.col === wide) {
@@ -109,7 +109,7 @@ export const seedBoard = difficulty => {
 				];
 				cells[i] = {
 					...c,
-					adj: adj.map(coords => idForCoords(coords[0], coords[1])),
+					adjacentCells: adj.map(coords => idForCoords(coords[0], coords[1])),
 				};
 				return;
 			} else {
@@ -122,7 +122,7 @@ export const seedBoard = difficulty => {
 				];
 				cells[i] = {
 					...c,
-					adj: adj.map(coords => idForCoords(coords[0], coords[1])),
+					adjacentCells: adj.map(coords => idForCoords(coords[0], coords[1])),
 				};
 				return;
 			}
@@ -136,20 +136,20 @@ export const seedBoard = difficulty => {
 			];
 			cells[i] = {
 				...c,
-				adj: adj.map(coords => idForCoords(coords[0], coords[1])),
+				adjacentCells: adj.map(coords => idForCoords(coords[0], coords[1])),
 			};
 			return;
 		} else if (c.col === wide) {
 			adj = [
-				[c.col - 1, wide - 1],
-				[c.col - 1, wide],
-				[c.col, wide - 1],
-				[c.col + 1, wide - 1],
-				[c.col + 1, wide],
+				[wide - 1, c.row - 1],
+				[wide, c.row - 1],
+				[wide - 1, c.row],
+				[wide - 1, c.row + 1],
+				[wide, c.row + 1],
 			];
 			cells[i] = {
 				...c,
-				adj: adj.map(coords => idForCoords(coords[0], coords[1])),
+				adjacentCells: adj.map(coords => idForCoords(coords[0], coords[1])),
 			};
 			return;
 		} else {
@@ -163,12 +163,36 @@ export const seedBoard = difficulty => {
 				[c.col, c.row + 1],
 				[c.col + 1, c.row + 1],
 			];
-			c[i] = {
+			cells[i] = {
 				...c,
-				adj: adj.map(coords => idForCoords(coords[0], coords[1])),
+				adjacentCells: adj.map(coords => idForCoords(coords[0], coords[1])),
 			};
 			return;
 		}
 	});
+	// cell: id: 1-X, col: num, row: num, mine: bool, adj: [id, id, id]
+	// Make the adjacent cells field more explicit
+	// Make an adjacent mines field
+	// While we're at it a flagged field
+	// And opened
+	cells.forEach((c, i) => {
+		if (c.mine) {
+			cells[i] = {
+				...c,
+				flag: false,
+				open: false,
+			};
+		} else {
+			cells[i] = {
+				...c,
+				flag: false,
+				open: false,
+				adjacentMines: c.adjacentCells.filter(id => cells[id - 1].mine).length,
+			};
+		}
+	});
+	// Oh, no I see how this could quickly go wrong, if the function gets
+	// moved, the array it's working on has no checks it'll be the same.
+	// Process.
 	return cells;
 };
