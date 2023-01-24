@@ -40,3 +40,9 @@ Are some of the things in layout actually layout components or are they componen
 I can't find anything on what the game bar (?) or anything are supposed to be called, so we've got the title bar, menu bar, and game bar now, go!
 
 > yellow squares look bigger on a white background compared to a black background, while red squares look smaller on a white background than a black background! ~Itten: Elements of Color
+
+## 2023-01-24
+
+Must credit:
+Mine by Vicons Design from <a href="https://thenounproject.com/browse/icons/term/mine/" target="_blank" title="Mine Icons">Noun Project</a>
+Flag by Sentya Irma from <a href="https://thenounproject.com/browse/icons/term/flag/" target="_blank" title="Flag Icons">Noun Project</a>
