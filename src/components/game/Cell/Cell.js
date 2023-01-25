@@ -8,8 +8,9 @@ const CellEl = styled.div`
 
 	width: ${cellSize}px;
 	height: ${cellSize}px;
-	background: #888;
-	border: 1px inset #555;
+	background: ${props =>
+		props.open ? 'var(--shade-700)' : 'var(--shade-300)'};
+	border: 1px inset var(--tint-500);
 
 	color: ${props =>
 		props.type === '1'
@@ -29,20 +30,28 @@ const CellEl = styled.div`
 			: props.type === '8'
 			? 'var(--black)'
 			: null};
+
+	& * {
+		pointer-events: none;
+		background: transparent;
+	}
 `;
 
 const Image = styled.img`
 	width: 90%;
 `;
 
-const Cell = ({ type, open }) => (
-	<CellEl type={type} open={open}>
-		{open ? null : type === 'mine' ? (
-			<Image src={mine} />
-		) : type === 'blank' ? null : (
-			<strong>{type}</strong>
-		)}
-	</CellEl>
-);
+const Cell = ({ id, type, open, openCell }) => {
+	if (id === 1) console.log(open);
+	return (
+		<CellEl id={id} type={type} open={open} onClick={openCell}>
+			{!open ? null : type === 'mine' ? (
+				<Image src={mine} />
+			) : type === 'blank' ? null : (
+				<strong>{type}</strong>
+			)}
+		</CellEl>
+	);
+};
 
 export default Cell;
