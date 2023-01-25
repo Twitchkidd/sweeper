@@ -13,7 +13,17 @@ const Game = ({ difficulty }) => {
 			<GameBar />
 			<Board wide={wide}>
 				{cells.map(cell => (
-					<Cell key={cell.id}>{cell.mine ? 'm' : cell.adjacentMines}</Cell>
+					<Cell
+						key={cell.id}
+						type={
+							cell.mine
+								? 'mine'
+								: cell.adjacentMines
+								? `${cell.adjacentMines}`
+								: 'blank'
+						}
+						open={cell.open}
+					/>
 				))}
 			</Board>
 		</>

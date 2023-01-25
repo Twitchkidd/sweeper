@@ -46,3 +46,5 @@ I can't find anything on what the game bar (?) or anything are supposed to be ca
 Must credit:
 Mine by Vicons Design from <a href="https://thenounproject.com/browse/icons/term/mine/" target="_blank" title="Mine Icons">Noun Project</a>
 Flag by Sentya Irma from <a href="https://thenounproject.com/browse/icons/term/flag/" target="_blank" title="Flag Icons">Noun Project</a>
+
+Apparently each cell was 8x8px?!

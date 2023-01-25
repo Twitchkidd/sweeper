@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { cellSize } from '../../../../utils/constants/game.constants';
 
 const Board = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 
-	width: ${props => props.wide * 41}px;
+	width: ${props => props.wide * cellSize}px;
 	background: var(--warm-gray);
 `;
 
