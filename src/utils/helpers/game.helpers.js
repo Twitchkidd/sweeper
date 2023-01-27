@@ -21,11 +21,43 @@ export const sizeAndDensity = difficulty => {
 		default:
 			throw new Error('No difficulty set!');
 	}
-	return { wide, high, mines };
+	return { wide, high, minesNum: mines };
 };
 
+const initializeReturn = ({ wide, high, minesNum }) => ({
+	cells: [...Array(wide * high)],
+	minesNum,
+	wide,
+});
+
+// https://stackoverflow.com/a/36756480
+const randomBoolean = () => Math.random() < 0.5;
+// We might just go for the long approach here, didn't find an answer quickly
+
+const placeMines = ({ cellsArray, minesNum, wide }) => {
+	let minedCells = [];
+	let potential = cells.slice();
+	for (let i = 1; i <= mines; i++) {
+		const nextIndex = Math.floor(Math.random() * potential.length);
+		minedCells.push(potential[nextIndex]);
+		potential.splice(nextIndex, 1);
+	}
+	return {
+		minesNum,
+		wide,
+		cellsWithMines: mined,
+	};
+};
+
+export const seed = diff =>
+	addExports(
+		determineAdjacencies(placeMines(initializeReturn(sizeAndDensity(diff))))
+	);
+
+// addExports: anything aggregate, or 'helper' Mz. Helper Function
+
 export const seedBoard = difficulty => {
-	const { wide, high, mines } = sizeAndDensity(difficulty);
+	const { wide, high, minesNum } = sizeAndDensity(difficulty);
 	// Create the initial array of cells
 	let cells = range(wide * high);
 	// Decide the mined cells

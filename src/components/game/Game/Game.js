@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import GameBar from '../GameBar/GameBar';
 import Board from '../../layout/game/Board/Board';
 import Cell from '../Cell/Cell';
