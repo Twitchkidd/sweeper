@@ -48,3 +48,68 @@ Mine by Vicons Design from <a href="https://thenounproject.com/browse/icons/term
 Flag by Sentya Irma from <a href="https://thenounproject.com/browse/icons/term/flag/" target="_blank" title="Flag Icons">Noun Project</a>
 
 Apparently each cell was 8x8px?!
+
+## 2023-01-27
+
+Good morning! Let's play wtf did I write yesterday! I definitely felt inspired, the text is going in all directions, there's exclaimation points, ohhhkayyy ...
+
+`sweeper` State Management!\*
+
+`  <Game>
+    <GameBar />               // needs mines, flags, result
+    <Board>                   // needs width
+      {cells.map(c -> ... )}
+    </Board>
+  </Game>`
+
+`const Game ...`
+
+I'm trying to go through this and see what even the next part I was writing was, I jumped around the page a little ...
+
+`const Game = difficulty => {
+  const { width, minesNum } = useMemo(seed(diff)) // all crossed out`
+
+Then above that I wrote, with an arrow at 'difficulty', "difficulty change is handled one level up, pass in difficulty" and then:
+
+` const { width, mines } = whatever next // lol
+  const [ flags, setFlags ] = setState([]);
+  const mines = useMemo(minesSeed());
+  const [ openCells, setOpenCells ] = setState([]);
+  const [ result, setResult ] = useState(null);
+  const blanks = useMemo(blanksSeed());
+  const adjacencies = useMemo(`
+
+Then it stops, and underneath, "how bout [[id, dj1, dd2...],[...]]" which I don't really understand now, but then we have a bunch of lines, from, if the line with the comment saying "lol" is line 74 in the above code, lines go from 74, 76, 79, and 80, so width, mines, flags, blanks, and adjacencies, all converging with an arrow pointing to "const { all that } = seedFunction, above rerenders", and then I had another attempt at the props for <Game> and a little chair-throwing argument with myself that ended in, "but cells.map!" in very big font, and then:
+
+`const Game = ({ width, height, minesNumber }) => {
+  const cells = useMemo({" "}); // which I now don't really understand, but under it we have:
+  // \[\['mine'\],\[\],\[1, 3, 31, 32, 33\]\] // which is helpful.
+  const [ open, setOpen ] = useState([]);
+  const [ flags, setFlags ] = useState([]);
+  const [ result, setResult ] = useState(null);`
+
+Really quick, I _cannot_ stop typing 'flage' or 'useStatue', lol.
+
+Then:
+
+`const handleClick = e => {
+  const id = e.current.targetyadayada;
+  setOpen(prevOpen => { // open it if not flag or revealed
+  }, checkIfMine(id)
+}`
+
+With, apologetically, because we knew it was still not quite the right logic, process though, another arrow pointing to the callback function and saying, "Magic is in utilizing the callback method effectively \*\*\*"
+
+And then we're at the footnotes, so we have,
+
+\* sans fancy clicky-clicky-ness, first things first
+
+and,
+
+\*\* use result in markup, so the one 'open' mine is red, rest revealed // after a losing click
+
+and finally,
+
+Naming things is hard!
+
+So let's see if I can turn that into something useful, lol, here we go!
