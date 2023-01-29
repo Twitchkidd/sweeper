@@ -113,3 +113,7 @@ and finally,
 Naming things is hard!
 
 So let's see if I can turn that into something useful, lol, here we go!
+
+## 2023-01-29
+
+Oh interesting, I wonder if ssr solves the styled-components Cells thing. Perf test todo!
