@@ -42,7 +42,7 @@ const Image = styled.img`
 `;
 
 const Cell = ({ id, type, open, openCell }) => {
-	if (id === 1) console.log(open);
+	// if (id === 1) console.log(open);
 	return (
 		<CellEl id={id} type={type} open={open} onClick={openCell}>
 			{!open ? null : type === 'mine' ? (

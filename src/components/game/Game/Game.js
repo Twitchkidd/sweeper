@@ -13,23 +13,15 @@ const Game = ({ difficulty }) => {
 	const [open, setOpen] = useState([]);
 	const [revealed, setRevealed] = useState([]);
 	const [result, setResult] = useState(null);
-	const [count, setCount] = useState(0);
-
-	const upDoot = () => {
-		setCount(prevCount => ++prevCount);
-	};
+	const { adjacencies, cells, mines, wide } = board;
 
 	return (
 		<>
-			<GameBar flags={flags.length} mines={board.mines} result={result} />
-			<Board wide={board.wide}>
-				<p>{count}</p>
-				<button onClick={upDoot}>Doot!</button>
-				{/* {cells.map((c, i) => flags[i] ? (
-					// button disabled flag svg
-					<Cell disabled // you know what, these cells share a lot. Let's fix the cell component first */}
-				{/* // OOO LET'S NOT! */}
-				{/* ) : )} */}
+			<GameBar flags={flags.length} mines={mines} result={result} />
+			<Board wide={wide}>
+				{cells.map((c, i) => (
+					<Cell key={i} id={i} />
+				))}
 			</Board>
 		</>
 	);
