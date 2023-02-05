@@ -32,22 +32,19 @@ const CellEl = styled.div`
 			: null};
 
 	& * {
-		pointer-events: none;
+		width: 90%;
 		background: transparent;
+
+		pointer-events: none;
 	}
 `;
 
-const Image = styled.img`
-	width: 90%;
-`;
-
 const Cell = ({ id, type, open, openCell }) => {
-	// if (id === 1) console.log(open);
 	return (
 		<CellEl id={id} type={type} open={open} onClick={openCell}>
 			{!open ? null : type === 'mine' ? (
-				<Image src={mine} />
-			) : type === 'blank' ? null : (
+				<img src={mine} alt='Mine!' />
+			) : type === '0' ? null : (
 				<strong>{type}</strong>
 			)}
 		</CellEl>

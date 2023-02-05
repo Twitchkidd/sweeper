@@ -47,16 +47,21 @@ const spawnMines = ({ cells, high, minesNum, wide }) => {
 
 const determineAdjacencies = ({ cells, high, mines, wide }) => {
 	const cellsCoordsMines = cells.map(c => ({
-		row: Math.ceil(c + 1 / wide),
-		col: c + (1 % wide) === 0 ? wide : c + (1 % wide),
+		col: (c + 1) % wide === 0 ? wide : (c + 1) % wide,
+		row: Math.ceil((c + 1) / wide),
 		mine: mines.includes(c),
 	}));
-	const indexForCoords = (col, row) =>
-		cellsCoordsMines.forEach((c, i) => {
-			if (c.col === col && c.row === row) {
-				return i;
-			}
-		});
+	// const indexForCoords = (col, row) =>
+	// 	cellsCoordsMines.forEach((c, i) => {
+	// 		// ? :(
+	// 		if (c.col === col && c.row === row) {
+	// 			return i;
+	// 		}
+	// 	});
+	const indexForCoords = coords =>
+		cellsCoordsMines.findIndex(
+			el => el.col === coords[0] && el.row === coords[1]
+		);
 	const location = (col, row) => {
 		if (row === 1) {
 			if (col === 1) {
@@ -157,15 +162,15 @@ const determineAdjacencies = ({ cells, high, mines, wide }) => {
 	};
 	const cellsAdjacenciesMines = cellsCoordsMines.map(c => ({
 		mine: c.mine,
-		adjacentCells: adjacencies(c.col, c.row).map(indexForCoords),
+		adjacentCells: adjacencies(c.col, c.row),
 	}));
+	console.log(cellsAdjacenciesMines);
 	return { cells: cellsAdjacenciesMines, mines, wide };
 };
 
 const formatExport = ({ cells, mines, wide }) => ({
 	cells: cells.map(c => (c.mine ? ['mine'] : [...c.adjacentCells])),
-	mines,
-	minesNum: mines.length,
+	mines: mines.length,
 	wide,
 });
 
