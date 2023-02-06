@@ -1,3 +1,5 @@
+import { shuffle } from './array.helpers';
+
 export const sizeAndDensity = difficulty => {
 	let wide, high, mines;
 	switch (difficulty) {
@@ -22,7 +24,7 @@ export const sizeAndDensity = difficulty => {
 	return { wide, high, minesNum: mines };
 };
 
-const initializeReturn = ({ wide, high, minesNum }) => ({
+const initializeReturn = ({ high, minesNum, wide }) => ({
 	cells: [...Array(wide * high).keys()],
 	high,
 	minesNum,
@@ -30,13 +32,7 @@ const initializeReturn = ({ wide, high, minesNum }) => ({
 });
 
 const spawnMines = ({ cells, high, minesNum, wide }) => {
-	let mines = [];
-	let potential = cells.slice();
-	for (let i = 0; i < minesNum; i++) {
-		const nextIndex = Math.floor(Math.random() * potential.length);
-		mines.push(nextIndex);
-		potential.splice(nextIndex, 1);
-	}
+	const mines = shuffle(cells.slice()).slice(0, minesNum);
 	return {
 		cells,
 		high,
@@ -51,13 +47,6 @@ const determineAdjacencies = ({ cells, high, mines, wide }) => {
 		row: Math.ceil((c + 1) / wide),
 		mine: mines.includes(c),
 	}));
-	// const indexForCoords = (col, row) =>
-	// 	cellsCoordsMines.forEach((c, i) => {
-	// 		// ? :(
-	// 		if (c.col === col && c.row === row) {
-	// 			return i;
-	// 		}
-	// 	});
 	const indexForCoords = coords =>
 		cellsCoordsMines.findIndex(
 			el => el.col === coords[0] && el.row === coords[1]
@@ -162,19 +151,21 @@ const determineAdjacencies = ({ cells, high, mines, wide }) => {
 	};
 	const cellsAdjacenciesMines = cellsCoordsMines.map(c => ({
 		mine: c.mine,
-		adjacentCells: adjacencies(c.col, c.row),
+		adjacentCells: adjacencies(c.col, c.row).map(coordsArray =>
+			indexForCoords(coordsArray)
+		),
 	}));
-	console.log(cellsAdjacenciesMines);
-	return { cells: cellsAdjacenciesMines, mines, wide };
+	// const adjacentMinesFn = adjCells =>
+	// 	adjCells.filter(index => mines.includes(index)).length;
+	const cellsAdjacenciesMinesFull = cellsAdjacenciesMines.map(c => ({
+		...c,
+		// adjacentMines: adjacentMinesFn(c.adjacentCells),
+		adjacentMines: c.adjacentCells.filter(i => mines.includes(i)).length,
+	}));
+	console.log(mines.sort());
+	console.log(cellsAdjacenciesMinesFull);
+	return { cells: cellsAdjacenciesMinesFull, mines, wide };
 };
 
-const formatExport = ({ cells, mines, wide }) => ({
-	cells: cells.map(c => (c.mine ? ['mine'] : [...c.adjacentCells])),
-	mines: mines.length,
-	wide,
-});
-
 export const seed = diff =>
-	formatExport(
-		determineAdjacencies(spawnMines(initializeReturn(sizeAndDensity(diff))))
-	);
+	determineAdjacencies(spawnMines(initializeReturn(sizeAndDensity(diff))));

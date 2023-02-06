@@ -20,13 +20,13 @@ const Game = ({ difficulty }) => {
 
 	return (
 		<>
-			<GameBar flags={flags.length} mines={mines} result={result} />
+			<GameBar flags={flags.length} mines={mines.length} result={result} />
 			<Board wide={wide}>
 				{cells.map((c, i) => (
 					<Cell
 						key={i}
 						id={i}
-						type={c === ['mine'] ? 'mine' : `${c.length}`}
+						type={c.mine ? 'mine' : c.adjacentMines}
 						open={open.includes(i)}
 						openCell={handleOpenCell}
 					/>

@@ -13,21 +13,21 @@ const CellEl = styled.div`
 	border: 1px inset var(--tint-500);
 
 	color: ${props =>
-		props.type === '1'
+		props.type === 1
 			? 'var(--blue)'
-			: props.type === '2'
+			: props.type === 2
 			? 'var(--green-400)'
-			: props.type === '3'
+			: props.type === 3
 			? 'var(--red)'
-			: props.type === '4'
+			: props.type === 4
 			? 'var(--blue-500)'
-			: props.type === '5'
+			: props.type === 5
 			? 'var(--red-500)'
-			: props.type === '6'
+			: props.type === 6
 			? 'var(--teal)'
-			: props.type === '7'
+			: props.type === 7
 			? 'var(--purple)'
-			: props.type === '8'
+			: props.type === 8
 			? 'var(--black)'
 			: null};
 
