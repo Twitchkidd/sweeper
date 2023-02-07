@@ -9,18 +9,39 @@ const Game = ({ difficulty }) => {
 	const [board, setBoard] = useState(seedBoard);
 	const [flags, setFlags] = useState([]);
 	const [open, setOpen] = useState([]);
-	// const [revealed, setRevealed] = useState([]);
+	const [revealed, setRevealed] = useState([]);
 	const [result, setResult] = useState(null);
 	const { cells, mines, wide } = board;
 
+	const winLoseCheck = id => {
+		if (mines.includes(id)) {
+			setResult('lose');
+		}
+		console.log(cells.length - mines.length === open.length);
+		if (cells.length - mines.length === open.length) {
+			setResult('win');
+		}
+	};
+
 	const handleOpenCell = e => {
 		const id = Number(e.target.id);
-		setOpen(prev => [...prev, id]);
+		setOpen(prev => [...prev, id], winLoseCheck(id));
+	};
+
+	const handleNewGame = () => {
+		setOpen([]);
+		setResult(null);
+		setBoard(seed(difficulty));
 	};
 
 	return (
 		<>
-			<GameBar flags={flags.length} mines={mines.length} result={result} />
+			<GameBar
+				flags={flags.length}
+				mines={mines.length}
+				result={result}
+				newGame={handleNewGame}
+			/>
 			<Board wide={wide}>
 				{cells.map((c, i) => (
 					<Cell

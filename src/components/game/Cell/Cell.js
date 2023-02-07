@@ -44,7 +44,7 @@ const Cell = ({ id, type, open, openCell }) => {
 		<CellEl id={id} type={type} open={open} onClick={openCell}>
 			{!open ? null : type === 'mine' ? (
 				<img src={mine} alt='Mine!' />
-			) : type === '0' ? null : (
+			) : type === 0 ? null : (
 				<strong>{type}</strong>
 			)}
 		</CellEl>

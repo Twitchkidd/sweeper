@@ -155,15 +155,10 @@ const determineAdjacencies = ({ cells, high, mines, wide }) => {
 			indexForCoords(coordsArray)
 		),
 	}));
-	// const adjacentMinesFn = adjCells =>
-	// 	adjCells.filter(index => mines.includes(index)).length;
 	const cellsAdjacenciesMinesFull = cellsAdjacenciesMines.map(c => ({
 		...c,
-		// adjacentMines: adjacentMinesFn(c.adjacentCells),
 		adjacentMines: c.adjacentCells.filter(i => mines.includes(i)).length,
 	}));
-	console.log(mines.sort());
-	console.log(cellsAdjacenciesMinesFull);
 	return { cells: cellsAdjacenciesMinesFull, mines, wide };
 };
 

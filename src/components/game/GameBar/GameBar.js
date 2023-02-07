@@ -12,10 +12,12 @@ const Bar = styled.div`
 	}
 `;
 
-const GameBar = () => (
+const GameBar = ({ mines, newGame, result }) => (
 	<Bar>
-		<span id='mineCount'>000</span>
-		<span>:)</span>
+		<span id='mineCount'>{mines}</span>
+		<span onClick={newGame}>
+			{result === 'win' ? ':D' : result === 'lose' ? ':X' : ':)'}
+		</span>
 		<span id='timer'>99</span>
 	</Bar>
 );
