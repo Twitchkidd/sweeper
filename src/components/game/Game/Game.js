@@ -14,18 +14,56 @@ const Game = ({ difficulty }) => {
 	const { cells, mines, wide } = board;
 
 	const winLoseCheck = id => {
+		// if (mines.includes(id)) {
+		// 	setResult('lose');
+		// }
+		// console.log(cells.length - mines.length === open.length);
+		// if (cells.length - mines.length === open.length) {
+		// 	setResult('win');
+		// }
 		if (mines.includes(id)) {
-			setResult('lose');
-		}
-		console.log(cells.length - mines.length === open.length);
-		if (cells.length - mines.length === open.length) {
-			setResult('win');
+			return 'lose';
+		} else if (cells.length - mines.length - 1 === open.length) {
+			return 'win';
+		} else {
+			return '';
 		}
 	};
 
+	const adjCells = i => cells[i].adjacentCells;
+
+	const getSpread = id => {
+		// 1. check adjacent cells for blanks
+		// 2. add all adjacent to toOpen list
+		// 3. if any blanks, check new adjacencies for blanks
+		// 4. add all new adjacencies for blanks
+		// Step 3., 4. ad infinitum
+		// 5. return toOpen list
+
+		let toOpen = [id];
+	};
+
 	const handleOpenCell = e => {
+		// add openCell to willOpen list
+		// check for win/lose
+		// if blank, add adjacent cells to willOpen list
+		//   if blank, add adjacent cells to willOpen list
+		// check for win
+
 		const id = Number(e.target.id);
-		setOpen(prev => [...prev, id], winLoseCheck(id));
+		const willOpen = [id];
+
+		if (winLoseCheck(id) === 'lose') {
+			setOpen(prev => [...prev, id], setResult('lose'));
+		} else if (winLoseCheck(id) === 'win') {
+			console.log('yaaaay!');
+		} else if (cells[id].adjacentMines === 0) {
+			willOpen.push(getSpread(id));
+		} else {
+			setOpen(prev => [...prev, id]);
+		}
+
+		// This is the wrong way, it would be simpler to check spread and then win/lose
 	};
 
 	const handleNewGame = () => {
