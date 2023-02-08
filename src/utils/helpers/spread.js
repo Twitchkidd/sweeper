@@ -29,6 +29,19 @@
 // 	return spread(toOpen);
 // };
 
+// const openCell = () => ({});
+
+// const noneAreBlank = arr =>
+// 	arr.map(id => adj[id].filter(i => !isBlank(i))).length === 0; // That's only if the array has one blank only lol
+
+// const getCellsToOpen = id => {
+// 	if (!isBlank(id)) return id;
+// 	const spread = idArr => {
+// 		if (noneAreBlank(idArr)) return [...idArr, idArr.map(id => [...adj[id]])]; // Map => Array // Not sure that's right either
+// 	};
+// 	return spread([id]);
+// };
+
 const cells = [
 	// * adjacent cells, adjacent mines, mined
 ];
@@ -38,10 +51,14 @@ const adj = [
 
 const isBlank = id => cells[id].adjacentMines === 0;
 
-const openCell = () => ({});
-
 const getCellsToOpen = id => {
 	if (!isBlank(id)) return id;
-	const spread = () => ({});
-	return spread(id);
+	const spread = (cur, acc = []) => {
+		if (cur.length === 1) {
+			if (cur.map(id => adj[id].filter(i => !isBlank(i))).length === 0) {
+				return [id, ...adj[id]];
+			}
+		}
+	};
+	return spread([id]);
 };
