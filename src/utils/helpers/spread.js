@@ -114,7 +114,7 @@ const cells = [
 		mine: false,
 	},
 ];
-const adj = [
+const adjacencies = [
 	// * 0 1 2 3 mine on 2, clicking 0
 	// * 4 5 6 7
 	// * 8 9 0 1 ;)
@@ -140,7 +140,7 @@ const getCellsToOpen = id => {
 	const spread = (cur, acc = []) => {
 		// * Grab any new cells adjacent to the current working group
 		const newCells = cur.flatMap(id =>
-			[...adj[id]].filter(i => !acc.includes[i])
+			[...adjacencies[id]].filter(i => !acc.includes[i])
 		);
 		// * If none of them are blank, add all of them to the total and return it
 		if (!newCells.filter(i => !isBlank(i))) return [...acc, ...newCells];
