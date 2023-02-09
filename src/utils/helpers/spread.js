@@ -42,23 +42,117 @@
 // 	return spread([id]);
 // };
 
+const arrayEquiv = (a1, a2) =>
+	a1.length !== a2.length
+		? false
+		: a1.filter((x, i) => x !== a2[i]).length
+		? false
+		: true;
+
 const cells = [
-	// * adjacent cells, adjacent mines, mined
+	// * 0 1 2 3 mine on 2, clicking 0
+	// * 4 5 6 7
+	// * 8 9 0 1 ;)
+	{
+		adjacentCells: 3,
+		adjacentMines: 0,
+		mine: false,
+	},
+	{
+		adjacentCells: 5,
+		adjacentMines: 1,
+		mine: false,
+	},
+	{
+		adjacentCells: 5,
+		adjacentMines: 0,
+		mine: true,
+	},
+	{
+		adjacentCells: 3,
+		adjacentMines: 1,
+		mine: false,
+	},
+	{
+		adjacentCells: 5,
+		adjacentMines: 0,
+		mine: false,
+	},
+	{
+		adjacentCells: 8,
+		adjacentMines: 1,
+		mine: false,
+	},
+	{
+		adjacentCells: 8,
+		adjacentMines: 1,
+		mine: false,
+	},
+	{
+		adjacentCells: 5,
+		adjacentMines: 1,
+		mine: false,
+	},
+	{
+		adjacentCells: 3,
+		adjacentMines: 0,
+		mine: false,
+	},
+	{
+		adjacentCells: 5,
+		adjacentMines: 0,
+		mine: false,
+	},
+	{
+		adjacentCells: 5,
+		adjacentMines: 0,
+		mine: false,
+	},
+	{
+		adjacentCells: 3,
+		adjacentMines: 0,
+		mine: false,
+	},
 ];
 const adj = [
-	// * arrays of indicies
+	// * 0 1 2 3 mine on 2, clicking 0
+	// * 4 5 6 7
+	// * 8 9 0 1 ;)
+	[1, 4, 5], // 0
+	[0, 2, 4, 5, 6], // 1
+	[1, 3, 5, 6, 7], // 2
+	[2, 6, 7], // 3
+	[0, 1, 5, 8, 9], //4
+	[0, 1, 2, 4, 6, 8, 9, 10], //5
+	[1, 2, 3, 5, 7, 9, 10, 11], // 6
+	[2, 3, 6, 10, 11], // 7
+	[4, 5, 9], // 8
+	[4, 5, 6, 8, 10], // 9
+	[5, 6, 7, 9, 11], // 10
+	[6, 7, 10], //11
 ];
 
 const isBlank = id => cells[id].adjacentMines === 0;
 
 const getCellsToOpen = id => {
+	// * If the cell we're opening isn't blank, it's the only cell opened
 	if (!isBlank(id)) return id;
 	const spread = (cur, acc = []) => {
-		if (cur.length === 1) {
-			if (cur.map(id => adj[id].filter(i => !isBlank(i))).length === 0) {
-				return [id, ...adj[id]];
-			}
-		}
+		// * Grab any new cells adjacent to the current working group
+		const newCells = cur.flatMap(id =>
+			[...adj[id]].filter(i => !acc.includes[i])
+		);
+		// * If none of them are blank, add all of them to the total and return it
+		if (!newCells.filter(i => !isBlank(i))) return [...acc, ...newCells];
+		const newNonBlanks = newCells.filter(i => cells[i].adjacentMines > 0);
+		const newBlanks = newCells.filter(i => cells[i].adjacentMines === 0);
+		// * Add any new non-blank cells to the total and check new blanks,
+		// * until there are no more new blanks
+		spread(newBlanks, [...acc, ...newNonBlanks]);
 	};
 	return spread([id]);
 };
+
+console.log(getCellsToOpen(0));
+console.log([0, 1, 4, 5, 6, 7, 8, 9, 10, 11]);
+console.log(arrayEquiv(getCellsToOpen(0), [0, 1, 4, 5, 6, 7, 8, 9, 10, 11]));
