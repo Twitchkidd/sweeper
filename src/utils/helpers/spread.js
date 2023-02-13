@@ -42,12 +42,25 @@
 // 	return spread([id]);
 // };
 
-const arrayEquiv = (a1, a2) =>
-	a1.length !== a2.length
-		? false
-		: a1.filter((x, i) => x !== a2[i]).length
-		? false
-		: true;
+// const arrayEquiv = (a1, a2) =>
+// 	a1.length !== a2.length
+// 		? false
+// 		: a1.filter((x, i) => x !== a2[i]).length
+// 		? false
+// 		: true;
+
+const arrayEquiv = (a1, a2) => {
+	if (a1.length !== a2.length) return false;
+	const sortA2 = a2.slice().sort();
+	return a1
+		.sort()
+		.slice()
+		.every((v, i) => v === sortA2[i]);
+};
+
+// console.log(arrayEquiv([1, 2, 3], [1, 2, 3, 4]));
+// console.log(arrayEquiv([1, 2, 3], [1, 2, 4]));
+// console.log(arrayEquiv([1, 2, 3], [1, 3, 2]));
 
 const cells = [
 	// * 0 1 2 3 mine on 2, clicking 0
@@ -114,6 +127,7 @@ const cells = [
 		mine: false,
 	},
 ];
+
 const adjacencies = [
 	// * 0 1 2 3 mine on 2, clicking 0
 	// * 4 5 6 7
@@ -134,25 +148,94 @@ const adjacencies = [
 
 const isBlank = id => cells[id].adjacentMines === 0;
 
+// const getCellsToOpen = id => {
+// 	// * If the cell we're opening isn't blank, it's the only cell opened
+// 	if (!isBlank(id)) return id;
+// 	const spread = (cur, acc = []) => {
+// 		// * Grab any new cells adjacent to the current working group
+// 		const newCells = cur.flatMap(id =>
+// 			[...adjacencies[id]].filter(i => !acc.includes[i])
+// 		);
+// 		// * If none of them are blank, add all of them to the total and return it
+// 		if (!newCells.filter(i => !isBlank(i))) return [...acc, ...newCells];
+// 		const newNonBlanks = newCells.filter(i => cells[i].adjacentMines > 0);
+// 		const newBlanks = newCells.filter(i => cells[i].adjacentMines === 0);
+// 		// * Add any new non-blank cells to the total and check new blanks,
+// 		// * until there are no more new blanks
+// 		spread(newBlanks, [...acc, ...newNonBlanks]);
+// 	};
+// 	return spread([id]);
+// };
+
+// console.log(getCellsToOpen(0));
+// console.log([0, 1, 4, 5, 6, 7, 8, 9, 10, 11]);
+// console.log(arrayEquiv(getCellsToOpen(0), [0, 1, 4, 5, 6, 7, 8, 9, 10, 11]));
+
+// let i = 0;
+
+// const getCellsToOpenTest = id => {
+// 	if (!isBlank(id)) return [id];
+// 	const spread = (cur, acc = []) => {
+// 		i++;
+// 		// console.log('start', cur, acc);
+// 		let newAcc = [...acc];
+// 		let newCur = [];
+// 		for (const cell of cur) {
+// 			if (!newAcc.includes(cell)) {
+// 				newAcc.push(cell);
+// 			}
+// 		}
+// 		for (const cell of cur) {
+// 			for (const adj of adjacencies[cell]) {
+// 				if (!newAcc.includes(adj)) {
+// 					newAcc.push(adj);
+// 					if (isBlank(adj)) {
+// 						newCur.push(adj);
+// 					}
+// 				}
+// 			}
+// 		}
+// 		if (i > 8) return;
+// 		if (newCur.length > 0) {
+// 			return spread(newCur, newAcc);
+// 		} else {
+// 			return newAcc;
+// 		}
+// 	};
+// 	return spread([id]);
+// };
+
 const getCellsToOpen = id => {
-	// * If the cell we're opening isn't blank, it's the only cell opened
-	if (!isBlank(id)) return id;
+	if (!isBlank(id)) return [id];
 	const spread = (cur, acc = []) => {
-		// * Grab any new cells adjacent to the current working group
-		const newCells = cur.flatMap(id =>
-			[...adjacencies[id]].filter(i => !acc.includes[i])
-		);
-		// * If none of them are blank, add all of them to the total and return it
-		if (!newCells.filter(i => !isBlank(i))) return [...acc, ...newCells];
-		const newNonBlanks = newCells.filter(i => cells[i].adjacentMines > 0);
-		const newBlanks = newCells.filter(i => cells[i].adjacentMines === 0);
-		// * Add any new non-blank cells to the total and check new blanks,
-		// * until there are no more new blanks
-		spread(newBlanks, [...acc, ...newNonBlanks]);
+		let newAcc = [...acc];
+		let newCur = [];
+		for (const cell of cur) {
+			if (!newAcc.includes(cell)) {
+				newAcc.push(cell);
+			}
+		}
+		for (const cell of cur) {
+			for (const adj of adjacencies[cell]) {
+				if (!newAcc.includes(adj)) {
+					newAcc.push(adj);
+					if (isBlank(adj)) {
+						newCur.push(adj);
+					}
+				}
+			}
+		}
+		if (newCur.length > 0) {
+			return spread(newCur, newAcc);
+		} else {
+			return newAcc;
+		}
 	};
 	return spread([id]);
 };
 
-console.log(getCellsToOpen(0));
-console.log([0, 1, 4, 5, 6, 7, 8, 9, 10, 11]);
-console.log(arrayEquiv(getCellsToOpen(0), [0, 1, 4, 5, 6, 7, 8, 9, 10, 11]));
+// console.log(getCellsToOpen(0));
+// console.log(typeof getCellsToOpen(0));
+const what = getCellsToOpen(0);
+console.log(what);
+console.log(arrayEquiv(what, [0, 1, 4, 5, 6, 7, 8, 9, 10, 11]));
