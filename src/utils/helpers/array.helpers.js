@@ -18,13 +18,11 @@ export const shuffle = array => {
 	return array;
 };
 
-export const arrayEquiv = (a1, a2) =>
-	a1.length !== a2.length
-		? false
-		: a1.filter((x, i) => x !== a2[i]).length
-		? false
-		: true;
-
-// console.log(arrayEquiv([1, 2, 3, 4], [1, 2, 3, 4, 5]));
-// console.log(arrayEquiv([1, 2, 3, 4, 6], [1, 2, 3, 4, 5]));
-// console.log(arrayEquiv([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]));
+export const arrayEquiv = (a1, a2) => {
+	if (a1.length !== a2.length) return false;
+	const sortA2 = a2.slice().sort();
+	return a1
+		.sort()
+		.slice()
+		.every((v, i) => v === sortA2[i]);
+};

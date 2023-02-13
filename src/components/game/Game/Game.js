@@ -13,64 +13,63 @@ const Game = ({ difficulty }) => {
 	const [result, setResult] = useState(null);
 	const { cells, mines, wide } = board;
 
-	const winLoseCheck = id => {
-		// if (mines.includes(id)) {
-		// 	setResult('lose');
-		// }
-		// console.log(cells.length - mines.length === open.length);
-		// if (cells.length - mines.length === open.length) {
-		// 	setResult('win');
-		// }
-		if (mines.includes(id)) {
-			return 'lose';
-		} else if (cells.length - mines.length - 1 === open.length) {
-			return 'win';
-		} else {
-			return '';
-		}
-	};
-
-	const adjCells = i => cells[i].adjacentCells;
-
-	const getSpread = id => {
-		// 1. check adjacent cells for blanks
-		// 2. add all adjacent to toOpen list
-		// 3. if any blanks, check new adjacencies for blanks
-		// 4. add all new adjacencies for blanks
-		// Step 3., 4. ad infinitum
-		// 5. return toOpen list
-
-		let toOpen = [id];
-	};
-
-	const handleOpenCell = e => {
-		// add openCell to willOpen list
-		// check for win/lose
-		// if blank, add adjacent cells to willOpen list
-		//   if blank, add adjacent cells to willOpen list
-		// check for win
-
-		const id = Number(e.target.id);
-		const willOpen = [id];
-
-		if (winLoseCheck(id) === 'lose') {
-			setOpen(prev => [...prev, id], setResult('lose'));
-		} else if (winLoseCheck(id) === 'win') {
-			console.log('yaaaay!');
-		} else if (cells[id].adjacentMines === 0) {
-			willOpen.push(getSpread(id));
-		} else {
-			setOpen(prev => [...prev, id]);
-		}
-
-		// This is the wrong way, it would be simpler to check spread and then win/lose
-	};
-
 	const handleNewGame = () => {
 		setOpen([]);
 		setResult(null);
 		setBoard(seed(difficulty));
 	};
+
+	const isBlank = id => cells[id].adjacentMines === 0;
+
+	const getCellsToOpen = id => {
+		if (!isBlank(id)) return [id];
+		const spread = (cur, acc = []) => {
+			let newAcc = [...acc];
+			let newCur = [];
+			for (const cell of cur) {
+				if (!newAcc.includes(cell)) {
+					newAcc.push(cell);
+				}
+			}
+			for (const cell of cur) {
+				for (const adj of cells[cell].adjacentCells) {
+					if (!newAcc.includes(adj)) {
+						newAcc.push(adj);
+						if (isBlank(adj)) {
+							newCur.push(adj);
+						}
+					}
+				}
+			}
+			if (newCur.length > 0) {
+				return spread(newCur, newAcc);
+			} else {
+				return newAcc;
+			}
+		};
+		return spread([id]);
+	};
+
+	const handleOpenCell = e => {
+		const id = Number(e.target.id);
+		if (cells[id].mine) {
+			setResult('lose');
+		} else {
+			setOpen(prev => [...prev, getCellsToOpen(id)], winCheck());
+		}
+	};
+
+	const winCheck = () => console.log('yaaay');
+
+	// const winLoseCheck = id => {
+	// 	if (mines.includes(id)) {
+	// 		return 'lose';
+	// 	} else if (cells.length - mines.length - 1 === open.length) {
+	// 		return 'win';
+	// 	} else {
+	// 		return '';
+	// 	}
+	// };
 
 	return (
 		<>
