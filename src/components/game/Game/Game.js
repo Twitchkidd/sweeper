@@ -24,6 +24,7 @@ const Game = ({ difficulty }) => {
 	const getCellsToOpen = id => {
 		if (!isBlank(id)) return [id];
 		const spread = (cur, acc = []) => {
+			// console.log(cur, acc);
 			let newAcc = [...acc];
 			let newCur = [];
 			for (const cell of cur) {
@@ -52,14 +53,20 @@ const Game = ({ difficulty }) => {
 
 	const handleOpenCell = e => {
 		const id = Number(e.target.id);
+		console.log(id);
 		if (cells[id].mine) {
 			setResult('lose');
 		} else {
-			setOpen(prev => [...prev, getCellsToOpen(id)], winCheck());
+			console.log(getCellsToOpen(id));
+			setOpen(prev => {
+				console.log('prev', prev);
+				// console.log('wtf is this', [...prev, ...getCellsToOpen(id)]);
+				return [...prev, ...getCellsToOpen(id)];
+			}, winCheck());
 		}
 	};
 
-	const winCheck = () => console.log('yaaay');
+	const winCheck = () => console.log('open', open);
 
 	// const winLoseCheck = id => {
 	// 	if (mines.includes(id)) {
