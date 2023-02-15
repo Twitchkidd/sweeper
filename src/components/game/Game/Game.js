@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { seed } from '../../../utils/helpers/game.helpers';
 import GameBar from '../GameBar/GameBar';
 import Board from '../../layout/game/Board/Board';
@@ -9,14 +9,18 @@ const Game = ({ difficulty }) => {
 	const [board, setBoard] = useState(seedBoard);
 	const [flags, setFlags] = useState([]);
 	const [open, setOpen] = useState([]);
+	const [exploded, setExploded] = useState(null);
 	const [revealed, setRevealed] = useState([]);
 	const [result, setResult] = useState(null);
 	const { cells, mines, wide } = board;
 
 	const handleNewGame = () => {
-		setOpen([]);
-		setResult(null);
 		setBoard(seed(difficulty));
+		setFlags([]);
+		setExploded(null);
+		setOpen([]);
+		setRevealed([]);
+		setResult(null);
 	};
 
 	const isBlank = id => cells[id].adjacentMines === 0;
@@ -53,25 +57,25 @@ const Game = ({ difficulty }) => {
 	const handleOpenCell = e => {
 		const id = Number(e.target.id);
 		if (cells[id].mine) {
+			setExploded(id);
 			setResult('lose');
+			// setRevealed(/* the rest of them */);
 		} else {
 			setOpen(prev => {
 				return [...prev, ...getCellsToOpen(id)];
-			}, winCheck());
+			});
 		}
 	};
 
-	const winCheck = () => console.log('open', open);
+	const winCheck = () => {
+		if (cells.length - mines.length === open.length) {
+			setResult('win');
+		}
+	};
 
-	// const winLoseCheck = id => {
-	// 	if (mines.includes(id)) {
-	// 		return 'lose';
-	// 	} else if (cells.length - mines.length - 1 === open.length) {
-	// 		return 'win';
-	// 	} else {
-	// 		return '';
-	// 	}
-	// };
+	useEffect(() => {
+		winCheck();
+	}, [open]);
 
 	return (
 		<>
@@ -89,6 +93,8 @@ const Game = ({ difficulty }) => {
 						type={c.mine ? 'mine' : c.adjacentMines}
 						open={open.includes(i)}
 						openCell={handleOpenCell}
+						exploded={exploded === i}
+						revealed={revealed.includes(i)}
 					/>
 				))}
 			</Board>

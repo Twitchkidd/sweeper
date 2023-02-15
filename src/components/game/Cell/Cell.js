@@ -10,6 +10,7 @@ const CellEl = styled.div`
 	height: ${cellSize}px;
 	background: ${props =>
 		props.open ? 'var(--shade-700)' : 'var(--shade-300)'};
+	${props => (props.exploded ? 'background: var(--red);' : null)}
 	border: 1px inset var(--tint-500);
 
 	color: ${props =>
