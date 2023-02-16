@@ -40,10 +40,15 @@ const CellEl = styled.div`
 	}
 `;
 
-const Cell = ({ id, type, open, openCell }) => {
+const Cell = ({ id, type, open, openCell, exploded, revealed }) => {
 	return (
-		<CellEl id={id} type={type} open={open} onClick={openCell}>
-			{!open ? null : type === 'mine' ? (
+		<CellEl
+			id={id}
+			type={type}
+			open={open}
+			onClick={openCell}
+			exploded={exploded}>
+			{!open && !revealed ? null : type === 'mine' ? (
 				<img src={mine} alt='Mine!' />
 			) : type === 0 ? null : (
 				<strong>{type}</strong>

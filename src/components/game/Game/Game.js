@@ -59,7 +59,7 @@ const Game = ({ difficulty }) => {
 		if (cells[id].mine) {
 			setExploded(id);
 			setResult('lose');
-			// setRevealed(/* the rest of them */);
+			setRevealed(cells.map((c, i) => i).filter((c, i) => !open.includes(i)));
 		} else {
 			setOpen(prev => {
 				return [...prev, ...getCellsToOpen(id)];
