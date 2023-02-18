@@ -55,6 +55,7 @@ const Game = ({ difficulty }) => {
 	};
 
 	const handleOpenCell = e => {
+		if (result !== null) return;
 		const id = Number(e.target.id);
 		if (cells[id].mine) {
 			setExploded(id);
@@ -69,6 +70,10 @@ const Game = ({ difficulty }) => {
 
 	const winCheck = () => {
 		if (cells.length - mines.length === open.length) {
+			console.log(cells.length);
+			console.log(mines.length);
+			console.log(open.length);
+			console.log(open);
 			setResult('win');
 		}
 	};
