@@ -37,7 +37,7 @@ const Game = ({ difficulty }) => {
 			}
 			for (const cell of cur) {
 				for (const adj of cells[cell].adjacentCells) {
-					if (!newAcc.includes(adj)) {
+					if (!newAcc.includes(adj) && !open.includes(adj)) {
 						newAcc.push(adj);
 						if (isBlank(adj)) {
 							newCur.push(adj);
