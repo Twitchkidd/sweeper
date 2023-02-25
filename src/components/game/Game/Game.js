@@ -70,10 +70,6 @@ const Game = ({ difficulty }) => {
 
 	const winCheck = () => {
 		if (cells.length - mines.length === open.length) {
-			console.log(cells.length);
-			console.log(mines.length);
-			console.log(open.length);
-			console.log(open);
 			setResult('win');
 		}
 	};
